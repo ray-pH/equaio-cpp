@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://do0ixa0xw4bc7"]
+
+[ext_resource type="Script" path="res://Equaio.gd" id="1_4n0uh"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GDEquaio" type="GDEquaio" parent="."]
+script = ExtResource("1_4n0uh")
