@@ -1,3 +1,11 @@
 extension_api.json
 equaio/bin/libgdequaio.linux.template_debug.x86_64.so
 .sconsign.dblite
+extension-src/register_types.os
+extension-src/gd_equaio.os
+extension-src/gd_equaio.os
+extension-src/gd_equaio.os
+extension-src/register_types.os
+extension-src/gd_extension_utils.os
+extension-src/gd_equaio.os
+extension-src/register_types.os

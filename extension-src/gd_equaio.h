@@ -2,20 +2,59 @@
 #define GDEXAMPLE_H
 
 #include <godot_cpp/classes/node.hpp>
+#include <libequaio.h>
+#include <block_display.h>
+#include <parser.h>
 
 namespace godot {
 
 class GDEquaio : public Node {
     GDCLASS(GDEquaio, Node);
+private:
 protected:
-	static void _bind_methods();
+    static void _bind_methods();
 public:
-	GDEquaio();
-	~GDEquaio();
+    GDEquaio();
+    ~GDEquaio();
 
-	void _process(double delta) override;
+    void _process(double delta) override;
     int factorial(int n);
     TypedArray<int> factorials(int n);
+};
+
+//------------------------------
+class EqContext : public Object {
+    GDCLASS(EqContext, Object);
+private:
+protected:
+    static void _bind_methods();
+public:
+    Context ctx;
+    EqContext();
+    ~EqContext();
+    void set(
+        TypedArray<String> variables,
+        TypedArray<String> binary_operators,
+        TypedArray<String> unary_operators,
+        bool handle_numerics
+    );
+    Array get();
+};
+
+//------------------------------
+class EqExpression : public Object {
+    GDCLASS(EqExpression, Object);
+private:
+    Expression expr;
+protected:
+    static void _bind_methods();
+public:
+    EqExpression();
+    ~EqExpression();
+    EqExpression* copy();
+    String to_string();
+    void parse(String strexpr, EqContext* ctx);
+    // void parse(String strexpr);
 };
 
 }

@@ -1,2 +1,8 @@
 CompileFlags:
-  Add: [-Wall, -I../godot-cpp/gen/include/, -I../godot-cpp/include/, -I../godot-cpp/gdextension/]
+  Add: [
+    -Wall, 
+    -I../godot-cpp/gen/include/, 
+    -I../godot-cpp/include/, 
+    -I../godot-cpp/gdextension/,
+    -I../libequaio/include/,
+  ]

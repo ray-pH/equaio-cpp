@@ -13,9 +13,9 @@ env = SConscript("godot-cpp/SConstruct")
 # - LINKFLAGS are for linking flags
 
 # tweak this if you want to use different folders, or more folders, to store your source code in.
-# env.Append(CPPPATH=["extension-src/", "libequaio/include/"])
-env.Append(CPPPATH=["extension-src/"])
-sources = Glob("extension-src/*.cpp")
+env.Append(CPPPATH=["extension-src/", "libequaio/include/"])
+# env.Append(CPPPATH=["extension-src/"])
+sources = Glob("extension-src/*.cpp") + Glob("libequaio/src/*.cpp")
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(
