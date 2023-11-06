@@ -8,20 +8,6 @@
 
 namespace godot {
 
-class GDEquaio : public Node {
-    GDCLASS(GDEquaio, Node);
-private:
-protected:
-    static void _bind_methods();
-public:
-    GDEquaio();
-    ~GDEquaio();
-
-    void _process(double delta) override;
-    int factorial(int n);
-    TypedArray<int> factorials(int n);
-};
-
 //------------------------------
 class EqContext : public Object {
     GDCLASS(EqContext, Object);

@@ -14,7 +14,6 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
         return;
     }
 
-    ClassDB::register_class<GDEquaio>();
     ClassDB::register_class<EqContext>();
     ClassDB::register_class<EqExpression>();
 }
