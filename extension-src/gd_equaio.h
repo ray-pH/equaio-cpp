@@ -30,17 +30,35 @@ public:
 //------------------------------
 class EqExpression : public Object {
     GDCLASS(EqExpression, Object);
-private:
-    Expression expr;
 protected:
     static void _bind_methods();
 public:
+    Expression expr;
     EqExpression();
     ~EqExpression();
     EqExpression* copy();
     String to_string();
     void parse(String strexpr, EqContext* ctx);
     // void parse(String strexpr);
+};
+
+//-----------------------------
+class EqBlockDisplay : public Object {
+    GDCLASS(EqBlockDisplay, Object);
+private:
+    BlockDisplay::Block block;
+protected:
+    static void _bind_methods();
+public:
+    EqBlockDisplay();
+    ~EqBlockDisplay();
+    
+    void append(EqBlockDisplay* b);
+    void append_arr(TypedArray<EqBlockDisplay> bs);
+    void prepend(EqBlockDisplay* b);
+    void prepend_arr(TypedArray<EqBlockDisplay> bs);
+    String to_string() const;
+    static EqBlockDisplay* from_expression(EqExpression* expr, EqContext* ctx);
 };
 
 }

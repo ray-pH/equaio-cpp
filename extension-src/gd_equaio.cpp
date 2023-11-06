@@ -56,3 +56,41 @@ void EqExpression::parse(String strexpr, EqContext *ctx) {
     auto expr = parse_expression(from_godot(strexpr), ctx->ctx);
     if(expr.has_value()) this->expr = expr.value();
 }
+
+// ======================== BLOCK DISPLAY
+void EqBlockDisplay::_bind_methods() {
+    ClassDB::bind_method(D_METHOD("to_string"), &EqBlockDisplay::to_string);
+    ClassDB::bind_method(D_METHOD("append", "b"), &EqBlockDisplay::append);
+    ClassDB::bind_method(D_METHOD("prepend", "b"), &EqBlockDisplay::prepend);
+
+}
+
+EqBlockDisplay::EqBlockDisplay()  { this->block = {}; }
+EqBlockDisplay::~EqBlockDisplay() { }
+void EqBlockDisplay::append(EqBlockDisplay* b){
+    this->block.append(b->block);
+}
+void EqBlockDisplay::append_arr(TypedArray<EqBlockDisplay> bs){
+    for(int i = 0; i < bs.size(); i++){
+        EqBlockDisplay* b = Object::cast_to<EqBlockDisplay>(bs[i]);
+        this->append(b);
+    } 
+}
+void EqBlockDisplay::prepend(EqBlockDisplay* b){
+    this->block.prepend(b->block);
+}
+void EqBlockDisplay::prepend_arr(TypedArray<EqBlockDisplay> bs){
+    for(int i = 0; i < bs.size(); i++){
+        EqBlockDisplay* b = Object::cast_to<EqBlockDisplay>(bs[i]);
+        this->prepend(b);
+    }
+}
+String EqBlockDisplay::to_string() const{
+    return to_godot(this->block.to_string());
+}
+EqBlockDisplay* EqBlockDisplay::from_expression(EqExpression* expr, EqContext* ctx){
+    EqBlockDisplay *b = new EqBlockDisplay();
+    BlockDisplay::Block block = BlockDisplay::from_expression(expr->expr, ctx->ctx);
+    b->block = block;
+    return b;
+}
