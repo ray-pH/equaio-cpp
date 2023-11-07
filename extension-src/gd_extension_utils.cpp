@@ -15,3 +15,16 @@ std::vector<std::string> from_godot(const godot::TypedArray<godot::String> &v) {
     for (int i = 0; i < v.size(); i++) result[i] = from_godot((godot::String)v[i]);
     return result;
 }
+
+godot::TypedArray<int> to_godot(const std::vector<int> &v) {
+    godot::TypedArray<int> result;
+    result.resize(v.size());
+    for (int i = 0; i < v.size(); i++) result[i] = v[i];
+    return result;
+}
+std::vector<int> from_godot(const godot::TypedArray<int> &v) {
+    std::vector<int> result;
+    result.resize(v.size());
+    for (int i = 0; i < v.size(); i++) result[i] = v[i];
+    return result;
+}

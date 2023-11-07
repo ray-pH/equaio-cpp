@@ -59,6 +59,12 @@ public:
     void prepend_arr(TypedArray<EqBlockDisplay> bs);
     String to_string() const;
     static EqBlockDisplay* from_expression(EqExpression* expr, EqContext* ctx);
+
+    int get_type() const;
+    String get_value() const;
+    TypedArray<EqBlockDisplay> get_child() const;
+    TypedArray<int> get_metadata_address() const;
+    EqExpression* get_metadata_expression() const;
 };
 
 }

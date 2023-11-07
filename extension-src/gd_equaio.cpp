@@ -60,9 +60,15 @@ void EqExpression::parse(String strexpr, EqContext *ctx) {
 // ======================== BLOCK DISPLAY
 void EqBlockDisplay::_bind_methods() {
     ClassDB::bind_method(D_METHOD("to_string"), &EqBlockDisplay::to_string);
-    ClassDB::bind_method(D_METHOD("append", "b"), &EqBlockDisplay::append);
-    ClassDB::bind_method(D_METHOD("prepend", "b"), &EqBlockDisplay::prepend);
-
+    ClassDB::bind_method(D_METHOD("append", "block"), &EqBlockDisplay::append);
+    ClassDB::bind_method(D_METHOD("prepend", "block"), &EqBlockDisplay::prepend);
+    ClassDB::bind_method(D_METHOD("append_arr", "blocks"), &EqBlockDisplay::append_arr);
+    ClassDB::bind_method(D_METHOD("prepend_arr", "blocks"), &EqBlockDisplay::prepend_arr);
+    ClassDB::bind_method(D_METHOD("get_type"), &EqBlockDisplay::get_type);
+    ClassDB::bind_method(D_METHOD("get_value"), &EqBlockDisplay::get_value);
+    ClassDB::bind_method(D_METHOD("get_child"), &EqBlockDisplay::get_child);
+    ClassDB::bind_method(D_METHOD("get_metadata_address"), &EqBlockDisplay::get_metadata_address);
+    ClassDB::bind_method(D_METHOD("get_metadata_expression"), &EqBlockDisplay::get_metadata_expression);
 }
 
 EqBlockDisplay::EqBlockDisplay()  { this->block = {}; }
@@ -93,4 +99,25 @@ EqBlockDisplay* EqBlockDisplay::from_expression(EqExpression* expr, EqContext* c
     BlockDisplay::Block block = BlockDisplay::from_expression(expr->expr, ctx->ctx);
     b->block = block;
     return b;
+}
+
+int EqBlockDisplay::get_type() const{ return this->block.type; }
+String EqBlockDisplay::get_value() const{ return to_godot(this->block.value); }
+TypedArray<EqBlockDisplay> EqBlockDisplay::get_child() const{
+    TypedArray<EqBlockDisplay> arr;
+    arr.resize(this->block.child.size());
+    for(int i = 0; i < this->block.child.size(); i++){
+        EqBlockDisplay *b = new EqBlockDisplay();
+        b->block = this->block.child[i];
+        arr[i] = b;
+    }
+    return arr;
+}
+TypedArray<int> EqBlockDisplay::get_metadata_address() const{
+    return to_godot(this->block.metadata.addr);
+}
+EqExpression* EqBlockDisplay::get_metadata_expression() const{
+    EqExpression *expr = new EqExpression();
+    expr->expr = *this->block.metadata.expr;
+    return expr;
 }
