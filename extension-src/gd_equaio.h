@@ -63,11 +63,11 @@ public:
 
     int get_type() const;
     String get_value() const;
-    int get_child_count() const;
+    int get_children_count() const;
     // EqBlockDisplay* get_child_at(int id) const;
     // we have to do this because we can't return a pointer to a custom object
     void get_child_at(int id, EqBlockDisplay* dst) const;
-    TypedArray<EqBlockDisplay> get_child() const;
+    // TypedArray<EqBlockDisplay> get_children() const;
     TypedArray<int> get_metadata_address() const;
     // EqExpression* get_metadata_expression() const;
     void get_metadata_expression(EqExpression* dst) const;

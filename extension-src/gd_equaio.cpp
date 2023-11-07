@@ -63,9 +63,9 @@ void EqBlockDisplay::_bind_methods() {
     ClassDB::bind_method(D_METHOD("from_expression", "expression", "context"), &EqBlockDisplay::from_expression);
     ClassDB::bind_method(D_METHOD("get_type"), &EqBlockDisplay::get_type);
     ClassDB::bind_method(D_METHOD("get_value"), &EqBlockDisplay::get_value);
-    ClassDB::bind_method(D_METHOD("get_child_count"), &EqBlockDisplay::get_child_count);
+    ClassDB::bind_method(D_METHOD("get_children_count"), &EqBlockDisplay::get_children_count);
     ClassDB::bind_method(D_METHOD("get_child_at", "index", "destination"), &EqBlockDisplay::get_child_at);
-    ClassDB::bind_method(D_METHOD("get_child"), &EqBlockDisplay::get_child);
+    // ClassDB::bind_method(D_METHOD("get_child"), &EqBlockDisplay::get_child);
     ClassDB::bind_method(D_METHOD("get_metadata_address"), &EqBlockDisplay::get_metadata_address);
     ClassDB::bind_method(D_METHOD("get_metadata_expression", "destination"), &EqBlockDisplay::get_metadata_expression);
 }
@@ -100,20 +100,20 @@ void EqBlockDisplay::from_expression(EqExpression* expr, EqContext* ctx){
 
 int EqBlockDisplay::get_type() const{ return this->block.type; }
 String EqBlockDisplay::get_value() const{ return to_godot(this->block.value); }
-int EqBlockDisplay::get_child_count() const{ return this->block.child.size(); }
+int EqBlockDisplay::get_children_count() const{ return this->block.children.size(); }
 void EqBlockDisplay::get_child_at(int id, EqBlockDisplay* dst) const{
-    dst->block = this->block.child[id];
+    dst->block = this->block.children[id];
 }
-TypedArray<EqBlockDisplay> EqBlockDisplay::get_child() const{
-    TypedArray<EqBlockDisplay> arr;
-    arr.resize(this->block.child.size());
-    for(int i = 0; i < this->block.child.size(); i++){
-        EqBlockDisplay *b = new EqBlockDisplay();
-        b->block = this->block.child[i];
-        arr[i] = b;
-    }
-    return arr;
-}
+// TypedArray<EqBlockDisplay> EqBlockDisplay::get_children() const{
+//     TypedArray<EqBlockDisplay> arr;
+//     arr.resize(this->block.children.size());
+//     for(int i = 0; i < this->block.children.size(); i++){
+//         EqBlockDisplay *b = new EqBlockDisplay();
+//         b->block = this->block.children[i];
+//         arr[i] = b;
+//     }
+//     return arr;
+// }
 TypedArray<int> EqBlockDisplay::get_metadata_address() const{
     return to_godot(this->block.metadata.addr);
 }
