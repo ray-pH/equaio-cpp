@@ -40,18 +40,14 @@ Array EqContext::get(){
 // ======================= EXPRESSION
 void EqExpression::_bind_methods() {
     ClassDB::bind_method(D_METHOD("to_string"), &EqExpression::to_string);
-    ClassDB::bind_method(D_METHOD("copy"), &EqExpression::copy);
+    ClassDB::bind_method(D_METHOD("copy", "destination"), &EqExpression::copy);
     ClassDB::bind_method(D_METHOD("parse", "expression", "context"), &EqExpression::parse);
 }
 //
 EqExpression::EqExpression()  { this->expr = {}; }
 EqExpression::~EqExpression() { }
 String EqExpression::to_string() { return to_godot(this->expr.to_string()); }
-EqExpression* EqExpression::copy() {
-    EqExpression *expr = new EqExpression();
-    expr->expr = this->expr;
-    return expr;
-}
+void EqExpression::copy(EqExpression* dst) { dst->expr = this->expr.copy(); }
 void EqExpression::parse(String strexpr, EqContext *ctx) {
     auto expr = parse_expression(from_godot(strexpr), ctx->ctx);
     if(expr.has_value()) this->expr = expr.value();

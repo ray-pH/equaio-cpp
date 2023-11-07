@@ -34,9 +34,10 @@ protected:
     static void _bind_methods();
 public:
     Expression expr;
+
     EqExpression();
     ~EqExpression();
-    EqExpression* copy();
+    void copy(EqExpression* dst);
     String to_string();
     void parse(String strexpr, EqContext* ctx);
     // void parse(String strexpr);
