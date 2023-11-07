@@ -52,19 +52,24 @@ protected:
 public:
     EqBlockDisplay();
     ~EqBlockDisplay();
-    
+
     void append(EqBlockDisplay* b);
     void append_arr(TypedArray<EqBlockDisplay> bs);
     void prepend(EqBlockDisplay* b);
     void prepend_arr(TypedArray<EqBlockDisplay> bs);
     String to_string() const;
-    static EqBlockDisplay* from_expression(EqExpression* expr, EqContext* ctx);
+    void from_expression(EqExpression* expr, EqContext* ctx);
 
     int get_type() const;
     String get_value() const;
+    int get_child_count() const;
+    // EqBlockDisplay* get_child_at(int id) const;
+    // we have to do this because we can't return a pointer to a custom object
+    void get_child_at(int id, EqBlockDisplay* dst) const;
     TypedArray<EqBlockDisplay> get_child() const;
     TypedArray<int> get_metadata_address() const;
-    EqExpression* get_metadata_expression() const;
+    // EqExpression* get_metadata_expression() const;
+    void get_metadata_expression(EqExpression* dst) const;
 };
 
 }

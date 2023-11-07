@@ -1,8 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://do0ixa0xw4bc7"]
 
-[ext_resource type="Script" path="res://Equaio.gd" id="1_4n0uh"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_whn6u"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="GDEquaio" type="GDEquaio" parent="."]
-script = ExtResource("1_4n0uh")
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(40, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_whn6u")
