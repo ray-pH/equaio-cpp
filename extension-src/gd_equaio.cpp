@@ -67,6 +67,8 @@ void EqBlockDisplay::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_child_at", "index", "destination"), &EqBlockDisplay::get_child_at);
     // ClassDB::bind_method(D_METHOD("get_child"), &EqBlockDisplay::get_child);
     ClassDB::bind_method(D_METHOD("get_metadata_address"), &EqBlockDisplay::get_metadata_address);
+    ClassDB::bind_method(D_METHOD("get_metadata_leftaddr"), &EqBlockDisplay::get_metadata_leftaddr);
+    ClassDB::bind_method(D_METHOD("get_metadata_rightaddr"), &EqBlockDisplay::get_metadata_rightaddr);
     ClassDB::bind_method(D_METHOD("get_metadata_expression", "destination"), &EqBlockDisplay::get_metadata_expression);
 }
 
@@ -114,9 +116,9 @@ void EqBlockDisplay::get_child_at(int id, EqBlockDisplay* dst) const{
 //     }
 //     return arr;
 // }
-TypedArray<int> EqBlockDisplay::get_metadata_address() const{
-    return to_godot(this->block.metadata.addr);
-}
+TypedArray<int> EqBlockDisplay::get_metadata_address() const{ return to_godot(this->block.metadata.addr); }
+TypedArray<int> EqBlockDisplay::get_metadata_leftaddr() const{ return to_godot(this->block.metadata.leftaddr); }
+TypedArray<int> EqBlockDisplay::get_metadata_rightaddr() const{ return to_godot(this->block.metadata.rightaddr); }
 void EqBlockDisplay::get_metadata_expression(EqExpression* dst) const{
     dst->expr = *this->block.metadata.expr;
 }

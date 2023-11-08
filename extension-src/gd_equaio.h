@@ -2,7 +2,7 @@
 #define GDEXAMPLE_H
 
 #include <godot_cpp/classes/node.hpp>
-#include <libequaio.h>
+#include <expression.h>
 #include <block_display.h>
 #include <parser.h>
 
@@ -68,7 +68,10 @@ public:
     // we have to do this because we can't return a pointer to a custom object
     void get_child_at(int id, EqBlockDisplay* dst) const;
     // TypedArray<EqBlockDisplay> get_children() const;
+    
     TypedArray<int> get_metadata_address() const;
+    TypedArray<int> get_metadata_leftaddr() const;
+    TypedArray<int> get_metadata_rightaddr() const;
     // EqExpression* get_metadata_expression() const;
     void get_metadata_expression(EqExpression* dst) const;
 };
