@@ -17,6 +17,7 @@ void initialize_example_module(ModuleInitializationLevel p_level) {
     ClassDB::register_class<EqContext>();
     ClassDB::register_class<EqExpression>();
     ClassDB::register_class<EqBlockDisplay>();
+    ClassDB::register_class<EqTask>();
 }
 
 void uninitialize_example_module(ModuleInitializationLevel p_level) {
